@@ -13,9 +13,11 @@ Console.Clear();
 System.Console.WriteLine("Введи желаемую Максимальную длинну элемента в символах: ");
 int max = Convert.ToInt32(Console.ReadLine());
 
-string[] array {"Hello","2","world",":-)"};
+string[] array1 = { "Hello", "2", "world", ":-)" };
+string[] array2 = { "1234", "1567", "-2", "computer science" };
+string[] array3 = { "Russia", "Denmark", "Kazan" };
 
-void CountRequiredElements(string[] arr, int max)
+int CountRequiredElements(string[] arr, int max)
 {
     int count = 0;
     for (int i = 0; i < arr.Length; i++)
@@ -25,7 +27,23 @@ void CountRequiredElements(string[] arr, int max)
     return count;
 }
 
-void PrintArray(int[] arrayToPrint)
+string[] RequiredElementsArray(string[] arr, int max)
+{
+    int arrlength = CountRequiredElements(arr, max);
+    string[] resultArray = new string[arrlength];
+    int resultArrayIndex = 0;
+    for (int i = 0; i < arr.Length; i++)
+    {
+        if (arr[i].Length <= max)
+        {
+            resultArray[resultArrayIndex] = arr[i];
+            resultArrayIndex++;
+        }
+    }
+    return resultArray;
+}
+
+void PrintArray(string[] arrayToPrint)
 {
     Console.Write("[");
     for (int i = 0; i < arrayToPrint.Length; i++)
@@ -36,20 +54,27 @@ void PrintArray(int[] arrayToPrint)
     Console.Write("]");
 }
 
-int[] CopyArray(int[] array)
-{
-    int[] arrayCopy = new int[array.Length];
-    for (int i = 0; i < array.Length; i++)
-    {
-        arrayCopy[i] = array[i];
-    }
-    return arrayCopy;
-}
-
-int[] array = GetRandomArray(arrayL, min, max);
-int[] userArray = CopyArray(array);
+System.Console.WriteLine();
 Console.ForegroundColor = ConsoleColor.Red;
-PrintArray(array);
+PrintArray(array1);
+Console.ForegroundColor = ConsoleColor.White;
+System.Console.Write("->");
 Console.ForegroundColor = ConsoleColor.Green;
-PrintArray(userArray);
+PrintArray(RequiredElementsArray(array1, max));
+
+System.Console.WriteLine();
+Console.ForegroundColor = ConsoleColor.Red;
+PrintArray(array2);
+Console.ForegroundColor = ConsoleColor.White;
+System.Console.Write("->");
+Console.ForegroundColor = ConsoleColor.Green;
+PrintArray(RequiredElementsArray(array2, max));
+
+System.Console.WriteLine();
+Console.ForegroundColor = ConsoleColor.Red;
+PrintArray(array3);
+Console.ForegroundColor = ConsoleColor.White;
+System.Console.Write("->");
+Console.ForegroundColor = ConsoleColor.Green;
+PrintArray(RequiredElementsArray(array3, max));
 Console.ForegroundColor = ConsoleColor.White;
